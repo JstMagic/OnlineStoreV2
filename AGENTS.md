@@ -21,6 +21,7 @@ _None recorded yet._
 
 ## Project log
 
+- 2026-07-10: The deploy build for this app FAILED. Fix the code so it builds cleanly inside a container (no network and no running backend/database at bu — pandoc-3.10-1-amd64.deb
 - 2026-07-10: try to fix the deployment issue — apps/web/next.config.js
 - 2026-07-10: fix it — apps/api/src/app.module.ts, apps/api/src/modules/orders/dto/create-order.dto.ts, apps/web/components/CheckoutForm.tsx
 - 2026-07-07: Create a visually appealing online store using Next.js, NestJS, and Tailwind CSS. This should not be a full enterprise e-commerce platform,  — apps/api/src/interfaces/index.ts, apps/api/src/main.ts, apps/api/src/mock-data/categories.ts, apps/api/src/mock-data/products.ts, apps/api/src/modules/cart/cart.controller.ts, apps/api/src/modules/cart/cart.module.ts, apps/api/src/modules/cart/cart.service.ts, apps/api/src/modules/cart/dto/add-to-cart.dto.ts
