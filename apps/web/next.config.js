@@ -23,9 +23,23 @@ const nextConfig = {
   // We lint via our own flat ESLint config (eslint.config.js) in the verify step; don't let
   // 'next build' run its own (eslintrc-based) lint, which would clash with the flat config.
   eslint: { ignoreDuringBuilds: true },
-  async headers() { return [{ source: '/:path*', headers: securityHeaders }]; },
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: securityHeaders,
+      },
+    ];
+  },
   // Proxy /api/* to the backend so the browser stays same-origin (no CORS, API port private).
-  async rewrites() { return [{ source: '/api/:path*', destination: (process.env.API_INTERNAL_URL || 'http://localhost:8080') + '/api/:path*' }]; },
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: (process.env.API_INTERNAL_URL || 'http://localhost:8080') + '/api/:path*',
+      },
+    ];
+  },
 };
 
 module.exports = nextConfig;
