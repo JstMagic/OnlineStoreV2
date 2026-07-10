@@ -37,7 +37,7 @@ export default function CheckoutForm() {
     computeTotal();
   }, [cart, priceMap]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!cart || cart.items.length === 0) return;
     setSubmitting(true);
