@@ -4,6 +4,8 @@ import CategoryCard from '@/components/CategoryCard';
 import { api } from '@/lib/api';
 import type { Product, Category } from '@/lib/types';
 
+export const dynamic = 'force-dynamic';
+
 export default async function HomePage() {
   const products = await api.getProducts(new URLSearchParams({ _limit: '4' }));
   const categories = await api.getCategories();
