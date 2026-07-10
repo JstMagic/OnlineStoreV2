@@ -1,13 +1,14 @@
-import { IsString, IsEmail, IsNotEmpty } from 'class-validator';
+import { IsString, IsEmail, IsNotEmpty, IsPhoneNumber } from 'class-validator';
 
 export class CreateOrderDto {
-  @IsString() @IsNotEmpty()
+  @IsString()
+  @IsNotEmpty()
   fullName: string;
 
   @IsEmail()
   email: string;
 
-  @IsString() @IsNotEmpty()
+  @IsPhoneNumber(undefined)
   phone: string;
 
   @IsString() @IsNotEmpty()
