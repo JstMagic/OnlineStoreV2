@@ -3,8 +3,13 @@
 // exposed. If either child exits, take the whole container down so the platform restarts it.
 const { spawn } = require('node:child_process');
 
-const API_PORT = process.env.API_PORT || '8080';
+let API_PORT = process.env.API_PORT || '8080';
 const WEB_PORT = process.env.PORT || '3000';
+
+// Avoid collision when the platform sets PORT=8080 (the same as the default API_PORT)
+if (parseInt(API_PORT, 10) === parseInt(WEB_PORT, 10)) {
+  API_PORT = String(parseInt(WEB_PORT, 10) + 1);
+}
 
 const api = spawn('node', ['apps/api/dist/main.js'], {
   stdio: 'inherit',
