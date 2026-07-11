@@ -12,11 +12,12 @@ FROM node:20-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production
 RUN addgroup -S app && adduser -S app -G app
-# API: compiled output + its production node_modules.
+# API: compiled output.
 COPY --from=build /app/apps/api/dist ./apps/api/dist
+# Web: Next standalone bundle (copied to root so server.js → ./apps/web/server.js).
+COPY --from=build /app/apps/web/.next/standalone ./
+# API: production node_modules (overwrites standalone’s node_modules with the full monorepo set).
 COPY --from=build /app/node_modules ./node_modules
-# Web: Next standalone bundle.
-COPY --from=build /app/apps/web/.next/standalone ./apps/web/
 COPY --from=build /app/apps/web/.next/static ./apps/web/.next/static
 COPY --from=build /app/apps/web/public ./apps/web/public
 COPY scripts/start.js ./scripts/start.js
