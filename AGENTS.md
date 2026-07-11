@@ -21,6 +21,7 @@ _None recorded yet._
 
 ## Project log
 
+- 2026-07-11: lets give it another go — scripts/start.js
 - 2026-07-11: The deployed container crash-loops. The logs show: Error: Cannot find module '/app/apps/web/server.js' (MODULE_NOT_FOUND), exit code 1. Two  — Dockerfile, scripts/start.js
 - 2026-07-10: The deploy build for this app FAILED. Fix the code so it builds cleanly inside a container (no network and no running backend/database at bu — apps/web/app/order-confirmation/OrderConfirmationClient.tsx, apps/web/app/order-confirmation/page.tsx, apps/web/app/page.tsx, apps/web/next-env.d.ts
 - 2026-07-10: try to fix the deployment issue — apps/web/next.config.js
