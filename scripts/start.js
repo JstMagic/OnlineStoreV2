@@ -15,7 +15,7 @@ const api = spawn('node', ['apps/api/dist/main.js'], {
   stdio: 'inherit',
   env: { ...process.env, PORT: API_PORT },
 });
-const web = spawn('node', ['apps/web/server.js'], {
+const web = spawn('node', ['server.js'], {
   stdio: 'inherit',
   env: { ...process.env, PORT: WEB_PORT, API_INTERNAL_URL: 'http://localhost:' + API_PORT, HOSTNAME: '0.0.0.0' },
 });
