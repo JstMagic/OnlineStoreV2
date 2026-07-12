@@ -7,7 +7,7 @@ import type { Product, Category } from '@/lib/types';
 export const dynamic = 'force-dynamic';
 
 export default async function HomePage() {
-  const products = await api.getProducts(new URLSearchParams({ _limit: '4' }));
+  const products = await api.getProducts();
   const categories = await api.getCategories();
 
   return (
