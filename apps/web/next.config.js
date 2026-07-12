@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 
+const path = require('path');
+
 // Security headers applied to every response. CSP is the last line of defense against XSS —
 // scripts are same-origin only; 'unsafe-inline' is allowed for STYLES only (Tailwind/Next inject
 // inline styles). Tighten with nonces if you remove inline styles.
@@ -40,6 +42,7 @@ const nextConfig = {
       },
     ];
   },
+  outputFileTracingRoot: path.resolve(__dirname, '..', '..'),
 };
 
 module.exports = nextConfig;

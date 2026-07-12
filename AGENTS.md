@@ -21,6 +21,7 @@ _None recorded yet._
 
 ## Project log
 
+- 2026-07-12: The app BUILT successfully but the deployed container never becomes HEALTHY (it crashes at startup, or it runs but fails the load-balancer h — apps/web/next.config.js
 - 2026-07-12: The app BUILT successfully but the deployed container never becomes HEALTHY (it crashes at startup, or it runs but fails the load-balancer h — apps/api/src/config/env.validation.ts
 - 2026-07-12: The app BUILT successfully but the deployed container never becomes HEALTHY (it crashes at startup, or it runs but fails the load-balancer h — apps/api/src/main.ts, scripts/start.js
 - 2026-07-11: The deployed container crash-loops. The logs show: Error: Cannot find module '/app/apps/web/server.js' (MODULE_NOT_FOUND), exit code 1. Two  — Dockerfile, scripts/start.js
