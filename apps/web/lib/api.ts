@@ -1,9 +1,13 @@
 import type { Product, Category, Cart, Order, OrderCustomer } from './types';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || '/api';
+const isServer = typeof window === 'undefined';
+const BASE = isServer
+  ? (process.env.API_INTERNAL_URL || 'http://localhost:8080')
+  : (process.env.NEXT_PUBLIC_API_URL || '/api');
 
 async function fetchApi<T>(endpoint: string, init?: RequestInit): Promise<T> {
-  const res = await fetch(`${API_URL}${endpoint}`, init);
+  const url = `${BASE}${endpoint}`;
+  const res = await fetch(url, init);
   if (!res.ok) {
     const text = await res.text();
     throw new Error(text || res.statusText);
