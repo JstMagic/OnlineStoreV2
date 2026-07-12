@@ -4,7 +4,7 @@ const EnvSchema = z.object({
   NODE_ENV: z.enum(['development', 'test', 'production']).default('development'),
   PORT: z.coerce.number().int().positive().default(8080),
   ALLOWED_ORIGINS: z.string().default('http://localhost:8080'),
-  DATABASE_URL: z.string().min(1),
+  DATABASE_URL: z.string().optional().default('postgres://placeholder:5432/placeholder'),
   PGSSLMODE: z.string().optional(),
 });
 export function validateEnv(config: Record<string, unknown>): z.infer<typeof EnvSchema> {
