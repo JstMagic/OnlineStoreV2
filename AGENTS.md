@@ -21,6 +21,7 @@ _None recorded yet._
 
 ## Project log
 
+- 2026-07-12: The app BUILT successfully but the deployed container never becomes HEALTHY (it crashes at startup, or it runs but fails the load-balancer h — apps/web/lib/api.ts
 - 2026-07-12: The app BUILT successfully but the deployed container never becomes HEALTHY (it crashes at startup, or it runs but fails the load-balancer h — scripts/start.js
 - 2026-07-12: The app BUILT successfully but the deployed container never becomes HEALTHY (it crashes at startup, or it runs but fails the load-balancer h — apps/web/next.config.js
 - 2026-07-12: The app BUILT successfully but the deployed container never becomes HEALTHY (it crashes at startup, or it runs but fails the load-balancer h — apps/api/src/config/env.validation.ts
