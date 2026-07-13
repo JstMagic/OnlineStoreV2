@@ -21,6 +21,7 @@ _None recorded yet._
 
 ## Project log
 
+- 2026-07-13: Make this change and open the deploy: In the Dockerfile, the runner stage copies the build in as root and then switches to USER app. That us — Dockerfile
 - 2026-07-13: lets add a support and faq page Recent conversation with the customer (context for what the instruction refers to; the instruction itself is — apps/web/app/support/page.tsx, apps/web/components/Header.tsx
 - 2026-07-12: The app BUILT successfully but the deployed container never becomes HEALTHY (it crashes at startup, or it runs but fails the load-balancer h — apps/web/app/page.tsx
 - 2026-07-12: The app BUILT successfully but the deployed container never becomes HEALTHY (it crashes at startup, or it runs but fails the load-balancer h — apps/web/lib/api.ts
