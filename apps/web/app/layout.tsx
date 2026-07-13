@@ -3,6 +3,7 @@ import './globals.css';
 import { CartProvider } from '@/context/CartContext';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import ClientErrorBoundary from '@/components/ClientErrorBoundary';
 
 export const metadata: Metadata = {
   title: 'OnlineStoreV2',
@@ -14,9 +15,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <body className="min-h-screen flex flex-col bg-white text-gray-900">
         <CartProvider>
-          <Header />
-          <main className="flex-1">{children}</main>
-          <Footer />
+          <ClientErrorBoundary>
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </ClientErrorBoundary>
         </CartProvider>
       </body>
     </html>
