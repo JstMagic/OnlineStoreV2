@@ -21,6 +21,7 @@ _None recorded yet._
 
 ## Project log
 
+- 2026-07-13: the website flickers, some times it renders the page and sometimes it doesnt and shows a blank page Recent conversation with the customer (c — apps/web/app/layout.tsx, apps/web/components/ClientErrorBoundary.tsx, apps/web/context/CartContext.tsx
 - 2026-07-13: Make this change and open the deploy: In the Dockerfile, the runner stage copies the build in as root and then switches to USER app. That us — Dockerfile
 - 2026-07-13: lets add a support and faq page Recent conversation with the customer (context for what the instruction refers to; the instruction itself is — apps/web/app/support/page.tsx, apps/web/components/Header.tsx
 - 2026-07-12: The app BUILT successfully but the deployed container never becomes HEALTHY (it crashes at startup, or it runs but fails the load-balancer h — apps/web/app/page.tsx
