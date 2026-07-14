@@ -3,6 +3,7 @@
 // exposed. If either child exits, take the whole container down so the platform restarts it.
 const { spawn } = require('node:child_process');
 const path = require('node:path');
+const fs = require('node:fs');
 
 let API_PORT = process.env.API_PORT || '8080';
 const WEB_PORT = process.env.PORT || '3000';
@@ -12,14 +13,24 @@ if (parseInt(API_PORT, 10) === parseInt(WEB_PORT, 10)) {
   API_PORT = String(parseInt(WEB_PORT, 10) + 1);
 }
 
+// Resolve the Next.js standalone server entry:
+//  - In the Docker production image it is at root (/app/server.js).
+//  - In the monorepo (dev verification) it lives under apps/web/.next/standalone/server.js.
+let webEntry = 'server.js';
+if (!fs.existsSync(webEntry)) {
+  const fallback = path.resolve('apps', 'web', '.next', 'standalone', 'server.js');
+  if (fs.existsSync(fallback)) {
+    webEntry = fallback;
+  }
+}
+
 const api = spawn('node', ['apps/api/dist/main.js'], {
   stdio: 'inherit',
   env: { ...process.env, PORT: API_PORT },
 });
-const web = spawn('node', ['server.js'], {
+const web = spawn('node', [webEntry], {
   stdio: 'inherit',
   env: { ...process.env, PORT: WEB_PORT, API_INTERNAL_URL: 'http://localhost:' + API_PORT, HOSTNAME: '0.0.0.0' },
-  cwd: path.join(__dirname, '..', 'apps', 'web'),
 });
 
 function shutdown(code) { api.kill('SIGTERM'); web.kill('SIGTERM'); process.exit(code); }
