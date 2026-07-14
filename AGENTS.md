@@ -21,6 +21,7 @@ _None recorded yet._
 
 ## Project log
 
+- 2026-07-14: In scripts/start.js, the API child is spawned with env: { ...process.env, PORT: API_PORT }, but apps/api/src/main.ts reads process.env.API_P — scripts/start.js
 - 2026-07-14: okay apply the fix Recent conversation with the customer (context for what the instruction refers to; the instruction itself is above): Agen — apps/api/src/main.ts, apps/web/package.json
 - 2026-07-13: apply the fix Recent conversation with the customer (context for what the instruction refers to; the instruction itself is above): User: the — apps/web/next.config.js
 - 2026-07-13: the website flickers, some times it renders the page and sometimes it doesnt and shows a blank page Recent conversation with the customer (c — apps/web/app/layout.tsx, apps/web/components/ClientErrorBoundary.tsx, apps/web/context/CartContext.tsx

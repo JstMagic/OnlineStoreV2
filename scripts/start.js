@@ -14,7 +14,7 @@ if (parseInt(API_PORT, 10) === parseInt(WEB_PORT, 10)) {
 
 const api = spawn('node', ['apps/api/dist/main.js'], {
   stdio: 'inherit',
-  env: { ...process.env, PORT: API_PORT },
+  env: { ...process.env, PORT: API_PORT, API_PORT },
 });
 const web = spawn('node', ['server.js'], {
   stdio: 'inherit',
