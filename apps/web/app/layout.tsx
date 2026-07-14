@@ -5,6 +5,8 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ClientErrorBoundary from '@/components/ClientErrorBoundary';
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: 'OnlineStoreV2',
   description: 'Modern online boutique',

@@ -21,6 +21,7 @@ _None recorded yet._
 
 ## Project log
 
+- 2026-07-14: The live preview and some deployed routes still have CSP problems. Two fixes in apps/web, mirroring how a fresh scaffold now does it: 1. app — apps/web/app/layout.tsx, apps/web/middleware.ts
 - 2026-07-14: The deployed site renders blank in the browser. The console shows the cause: six "Executing inline script violates ... script-src 'self'" CS — apps/web/middleware.ts, apps/web/next.config.js
 - 2026-07-14: In scripts/start.js, the API child is spawned with env: { ...process.env, PORT: API_PORT }, but apps/api/src/main.ts reads process.env.API_P — scripts/start.js
 - 2026-07-14: okay apply the fix Recent conversation with the customer (context for what the instruction refers to; the instruction itself is above): Agen — apps/api/src/main.ts, apps/web/package.json
