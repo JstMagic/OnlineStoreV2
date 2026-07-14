@@ -10,18 +10,21 @@ const path = require('path');
 // (the dashboard origin) so the in-dashboard preview can embed the dev server; production never
 // sets it, so it stays locked. X-Frame-Options is dropped because it can't express an allowlist
 // and a stray DENY would override the CSP; frame-ancestors is the modern, CSP-native control.
-const frameAncestors = process.env.PREVIEW_FRAME_ANCESTORS || "'none'";
 const securityHeaders = [
   { key: 'X-Content-Type-Options', value: 'nosniff' },
   { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
   { key: 'Strict-Transport-Security', value: 'max-age=31536000; includeSubDomains' },
-  { key: 'Content-Security-Policy', value: "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://images.unsplash.com; font-src 'self'; object-src 'none'; frame-ancestors " + frameAncestors + "; base-uri 'self'; form-action 'self'" },
 ];
 
 const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   output: 'standalone',
+  experimental: {
+    csp: {
+      nonce: 'x-nonce',
+    },
+  },
   // We lint via our own flat ESLint config (eslint.config.js) in the verify step; don't let
   // 'next build' run its own (eslintrc-based) lint, which would clash with the flat config.
   eslint: { ignoreDuringBuilds: true },
