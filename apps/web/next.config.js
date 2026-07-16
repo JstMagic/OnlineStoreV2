@@ -41,7 +41,9 @@ const nextConfig = {
     return [
       {
         source: '/api/:path*',
-        destination: (process.env.API_INTERNAL_URL || 'http://localhost:8080') + '/api/:path*',
+        // Strip the /api prefix: the Nest API serves routes at the root (/products, /cart), so
+        // /api/cart must proxy to <api>/cart, not <api>/api/cart (which 404s "Cannot GET /api/cart").
+        destination: (process.env.API_INTERNAL_URL || 'http://localhost:8080') + '/:path*',
       },
     ];
   },
