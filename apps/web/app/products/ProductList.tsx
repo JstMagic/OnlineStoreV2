@@ -13,21 +13,61 @@ export default function ProductList() {
   const [loading, setLoading] = useState(true);
   const [category, setCategory] = useState(searchParams.get('category') || '');
   const [sort, setSort] = useState('');
+  const [error, setError] = useState('');
+  const [retryKey, setRetryKey] = useState(0);
 
   useEffect(() => {
+    let ignore = false;
+
     async function load() {
-      const params = new URLSearchParams();
-      if (category) params.set('category', category);
-      if (sort) params.set('sort', sort);
-      const [prods, cats] = await Promise.all([api.getProducts(params), api.getCategories()]);
-      setProducts(prods);
-      setCategories(cats);
-      setLoading(false);
+      setLoading(true);
+      setError('');
+
+      try {
+        const params = new URLSearchParams();
+        if (category) params.set('category', category);
+        if (sort) params.set('sort', sort);
+
+        const [prods, cats] = await Promise.all([
+          api.getProducts(params),
+          api.getCategories(),
+        ]);
+
+        if (ignore) return;
+        setProducts(prods);
+        setCategories(cats);
+      } catch (err) {
+        if (ignore) return;
+        setError(err instanceof Error ? err.message : 'Failed to load products');
+      } finally {
+        if (!ignore) {
+          setLoading(false);
+        }
+      }
     }
+
     load();
-  }, [category, sort]);
+
+    return () => {
+      ignore = true;
+    };
+  }, [category, sort, retryKey]);
 
   if (loading) return <LoadingSpinner />;
+
+  if (error) {
+    return (
+      <div className="text-center py-12">
+        <p className="text-red-600 mb-4">Failed to load products: {error}</p>
+        <button
+          onClick={() => setRetryKey((k) => k + 1)}
+          className="px-4 py-2 bg-blue-600 text-white rounded-lg"
+        >
+          Retry
+        </button>
+      </div>
+    );
+  }
 
   return (
     <>
