@@ -21,6 +21,7 @@ _None recorded yet._
 
 ## Project log
 
+- 2026-08-23: come up with some features to add Recent conversation with the customer (context for what the instruction refers to; the instruction itself  — apps/api/src/modules/cart/cart.service.ts, apps/api/src/modules/products/dto/query-products.dto.ts, apps/api/src/modules/products/products.service.ts, apps/web/app/products/ProductList.tsx
 - 2026-08-22: when i click on shop its stuck on spinning wheel Recent conversation with the customer (context for what the instruction refers to; the inst — apps/web/app/api/[...path]/route.ts, apps/web/app/products/ProductList.tsx, apps/web/next.config.js, package-lock.json
 - 2026-07-14: The live preview and some deployed routes still have CSP problems. Two fixes in apps/web, mirroring how a fresh scaffold now does it: 1. app — apps/web/app/layout.tsx, apps/web/middleware.ts
 - 2026-07-14: The deployed site renders blank in the browser. The console shows the cause: six "Executing inline script violates ... script-src 'self'" CS — apps/web/middleware.ts, apps/web/next.config.js

@@ -11,6 +11,16 @@ export class ProductsService {
     if (categoryFilter) {
       result = result.filter(p => p.category.toLowerCase() === categoryFilter.toLowerCase());
     }
+    if (query.q) {
+      const q = query.q.trim().toLowerCase();
+      if (q.length > 0) {
+        result = result.filter(
+          (p) =>
+            p.name.toLowerCase().includes(q) ||
+            p.description.toLowerCase().includes(q),
+        );
+      }
+    }
     if (query.sort === 'name') {
       result.sort((a, b) => a.name.localeCompare(b.name));
     } else if (query.sort === 'price') {
