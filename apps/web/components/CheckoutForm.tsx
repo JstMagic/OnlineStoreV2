@@ -19,31 +19,55 @@ export default function CheckoutForm() {
 
   useEffect(() => {
     if (!cart || cart.items.length === 0) return;
+
+    let ignore = false;
+    const items = cart.items;
+
     async function computeTotal() {
-      let sum = 0;
-      const promises = cart!.items.map(async (item) => {
-        if (priceMap.has(item.productId)) {
-          const price = priceMap.get(item.productId)!;
+      try {
+        let sum = 0;
+        for (const item of items) {
+          let price = priceMap.get(item.productId);
+          if (price === undefined) {
+            const product = await api.getProduct(item.productId);
+            priceMap.set(item.productId, product.price);
+            price = product.price;
+          }
           sum += price * item.quantity;
-          return;
         }
-        const prod = await api.getProduct(item.productId);
-        priceMap.set(item.productId, prod.price);
-        sum += prod.price * item.quantity;
-      });
-      await Promise.all(promises);
-      setTotal(sum);
+        if (!ignore) {
+          setTotal(sum);
+        }
+      } catch (err) {
+        if (!ignore) {
+          setError(err instanceof Error ? err.message : 'Failed to load order total');
+        }
+      }
     }
+
     computeTotal();
+
+    return () => {
+      ignore = true;
+    };
   }, [cart, priceMap]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!cart || cart.items.length === 0) return;
+
     setSubmitting(true);
+    setError('');
+
     try {
       const order: Order = await api.placeOrder(cartId, form);
-      await clearCart();
+      try {
+        await clearCart();
+      } catch (clearError) {
+        // Order was placed successfully; clearing the local cart cart can be retried
+        // later. Do not block the successful order confirmation for this.
+        console.error('Failed to clear cart after order', clearError);
+      }
       router.push(`/order-confirmation?orderId=${order.id}`);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Something went wrong');
