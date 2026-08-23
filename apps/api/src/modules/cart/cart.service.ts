@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import type { Cart, CartItem } from '../../interfaces';
 import { AddToCartDto } from './dto/add-to-cart.dto';
 import { ProductsService } from '../products/products.service';
@@ -18,10 +18,14 @@ export class CartService {
 
   addItem(cartId: string, dto: AddToCartDto): Cart {
     const product = this.productsService.findById(dto.productId);
-    if (!product) throw new Error('Product not found');
+    if (!product) throw new BadRequestException('Product not found');
 
     const cart = this.getCart(cartId);
     const existing = cart.items.find(i => i.productId === dto.productId);
+    const currentQty = existing ? existing.quantity : 0;
+    if (currentQty + dto.quantity > product.stock) {
+      throw new BadRequestException('Insufficient stock');
+    }
     if (existing) {
       existing.quantity += dto.quantity;
     } else {
@@ -31,9 +35,17 @@ export class CartService {
   }
 
   updateItem(cartId: string, productId: number, dto: { quantity: number }): Cart {
+    const product = this.productsService.findById(productId);
+    if (!product) throw new BadRequestException('Product not found');
+
     const cart = this.getCart(cartId);
     const item = cart.items.find(i => i.productId === productId);
-    if (!item) throw new Error('Cart item not found');
+    if (!item) throw new BadRequestException('Cart item not found');
+
+    if (dto.quantity > product.stock) {
+      throw new BadRequestException('Insufficient stock');
+    }
+
     item.quantity = dto.quantity;
     return cart;
   }

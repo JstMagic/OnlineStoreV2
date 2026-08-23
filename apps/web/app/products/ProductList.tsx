@@ -5,6 +5,7 @@ import { api } from '@/lib/api';
 import type { Product, Category } from '@/lib/types';
 import ProductGrid from '@/components/ProductGrid';
 import LoadingSpinner from '@/components/LoadingSpinner';
+import Input from '@/components/Input';
 
 export default function ProductList() {
   const searchParams = useSearchParams();
@@ -13,6 +14,9 @@ export default function ProductList() {
   const [loading, setLoading] = useState(true);
   const [category, setCategory] = useState(searchParams.get('category') || '');
   const [sort, setSort] = useState('');
+  const initialSearch = searchParams.get('q') ?? '';
+  const [searchInput, setSearchInput] = useState(initialSearch);
+  const [search, setSearch] = useState(initialSearch);
   const [error, setError] = useState('');
   const [retryKey, setRetryKey] = useState(0);
 
@@ -27,6 +31,7 @@ export default function ProductList() {
         const params = new URLSearchParams();
         if (category) params.set('category', category);
         if (sort) params.set('sort', sort);
+        if (search) params.set('q', search);
 
         const [prods, cats] = await Promise.all([
           api.getProducts(params),
@@ -51,7 +56,7 @@ export default function ProductList() {
     return () => {
       ignore = true;
     };
-  }, [category, sort, retryKey]);
+  }, [category, sort, search, retryKey]);
 
   if (loading) return <LoadingSpinner />;
 
@@ -71,6 +76,35 @@ export default function ProductList() {
 
   return (
     <>
+      <div className="flex flex-wrap gap-2 items-end mb-4">
+        <div className="flex-1 min-w-[220px] max-w-sm">
+          <Input
+            label="Search"
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            placeholder="Search products..."
+          />
+        </div>
+        <button
+          type="button"
+          onClick={() => setSearch(searchInput.trim())}
+          className="px-4 py-2 bg-blue-600 text-white rounded-lg"
+        >
+          Search
+        </button>
+        {search && (
+          <button
+            type="button"
+            onClick={() => {
+              setSearchInput('');
+              setSearch('');
+            }}
+            className="px-4 py-2 text-gray-600 underline"
+          >
+            Clear
+          </button>
+        )}
+      </div>
       <div className="flex flex-wrap gap-4 mb-8">
         <select value={category} onChange={e => setCategory(e.target.value)} className="border rounded px-3 py-2">
           <option value="">All Categories</option>
