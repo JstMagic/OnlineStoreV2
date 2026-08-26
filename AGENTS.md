@@ -21,7 +21,8 @@ _None recorded yet._
 
 ## Project log
 
-- 2026-08-26: change the basket icon to something more futuristic Recent conversation with the customer (context for what the instruction refers to; the i — apps/web/components/Header.tsx, apps/web/package.json, package-lock.json
+- 2026-08-26: Also lets add a policy page and faq pase Recent conversation with the customer (context for what the instruction refers to; the instruction  — AGENTS.md, apps/web/app/faq/page.tsx, apps/web/app/policy/page.tsx, apps/web/components/Header.tsx
+- 2026-08-30: Added a policy page and FAQ page to the web application. Updated the header to include links to these pages.
 - 2026-08-22: when i click on shop its stuck on spinning wheel Recent conversation with the customer (context for what the instruction refers to; the inst — apps/web/app/api/[...path]/route.ts, apps/web/app/products/ProductList.tsx, apps/web/next.config.js, package-lock.json
 - 2026-07-14: The live preview and some deployed routes still have CSP problems. Two fixes in apps/web, mirroring how a fresh scaffold now does it: 1. app — apps/web/app/layout.tsx, apps/web/middleware.ts
 - 2026-07-14: The deployed site renders blank in the browser. The console shows the cause: six "Executing inline script violates ... script-src 'self'" CS — apps/web/middleware.ts, apps/web/next.config.js
