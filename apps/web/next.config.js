@@ -25,6 +25,10 @@ const nextConfig = {
       nonce: 'x-nonce',
     },
   },
+  i18n: {
+    locales: ['en', 'de'],
+    defaultLocale: 'en',
+  },
   // We lint via our own flat ESLint config (eslint.config.js) in the verify step; don't let
   // 'next build' run its own (eslintrc-based) lint, which would clash with the flat config.
   eslint: { ignoreDuringBuilds: true },

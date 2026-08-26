@@ -21,6 +21,7 @@ _None recorded yet._
 
 ## Project log
 
+- 2026-08-26: lets change the design of the shops, lets make it really sleek and futuristic Recent conversation with the customer (context for what the in — apps/web/components/ProductCard.tsx
 - 2026-08-26: change the basket icon to something more futuristic Recent conversation with the customer (context for what the instruction refers to; the i — apps/web/components/Header.tsx, apps/web/package.json, package-lock.json
 - 2026-08-22: when i click on shop its stuck on spinning wheel Recent conversation with the customer (context for what the instruction refers to; the inst — apps/web/app/api/[...path]/route.ts, apps/web/app/products/ProductList.tsx, apps/web/next.config.js, package-lock.json
 - 2026-07-14: The live preview and some deployed routes still have CSP problems. Two fixes in apps/web, mirroring how a fresh scaffold now does it: 1. app — apps/web/app/layout.tsx, apps/web/middleware.ts
