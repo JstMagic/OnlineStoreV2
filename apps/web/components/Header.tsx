@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import { FaShoppingCart } from 'react-icons/fa';
 import { useCart } from '@/context/CartContext';
 
 export default function Header() {
@@ -13,7 +14,8 @@ export default function Header() {
           <Link href="/products" className="hover:text-blue-600">Shop</Link>
           <Link href="/support" className="hover:text-blue-600">Support</Link>
           <Link href="/cart" className="relative hover:text-blue-600">
-            Cart {itemCount > 0 && <span className="absolute -top-2 -right-3 bg-blue-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">{itemCount}</span>}
+            <FaShoppingCart className="inline-block text-2xl" />
+            {itemCount > 0 && <span className="absolute -top-2 -right-3 bg-blue-600 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">{itemCount}</span>}
           </Link>
         </nav>
       </div>
