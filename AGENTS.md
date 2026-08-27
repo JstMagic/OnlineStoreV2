@@ -21,6 +21,11 @@ _None recorded yet._
 
 ## Project log
 
+- 2026-08-27: okay go ahead and merge them Recent conversation with the customer (context for what the instruction refers to; the instruction itself is ab — AGENTS.md
+- 2026-08-27: please merge them Recent conversation with the customer (context for what the instruction refers to; the instruction itself is above): User: — AGENTS.md
+- 2026-09-01: Merged pull requests into the main branch. Reviewed code quality, tested locally, resolved conflicts, and updated the main branch. Ensured all changes adhere to project conventions and security requirements.
+- 2026-09-02: Merged PR #20 and PR #18 into the main branch. Reviewed and resolved conflicts, ensuring all changes adhere to project conventions and security requirements.
+
 - 2026-08-26: Also lets add a policy page and faq pase Recent conversation with the customer (context for what the instruction refers to; the instruction  — AGENTS.md, apps/web/app/faq/page.tsx, apps/web/app/policy/page.tsx, apps/web/components/Header.tsx
 - 2026-08-30: Added a policy page and FAQ page to the web application. Updated the header to include links to these pages.
 - 2026-08-22: when i click on shop its stuck on spinning wheel Recent conversation with the customer (context for what the instruction refers to; the inst — apps/web/app/api/[...path]/route.ts, apps/web/app/products/ProductList.tsx, apps/web/next.config.js, package-lock.json
