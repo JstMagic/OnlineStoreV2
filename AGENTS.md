@@ -21,10 +21,11 @@ _None recorded yet._
 
 ## Project log
 
+- 2026-08-30: Implement Order History Recent conversation with the customer (context for what the instruction refers to; the instruction itself is above): — apps/web/lib/api.ts, AGENTS.md, README.md, apps/api/src/modules/orders/dto/query-orders.dto.ts, apps/api/src/modules/orders/orders.controller.ts, apps/api/src/modules/orders/orders.service.ts, apps/web/README.md, apps/web/app/order-history/page.tsx
 - 2026-08-27: okay go ahead and merge them Recent conversation with the customer (context for what the instruction refers to; the instruction itself is ab — AGENTS.md
 - 2026-08-27: please merge them Recent conversation with the customer (context for what the instruction refers to; the instruction itself is above): User: — AGENTS.md
 - 2026-09-01: Merged pull requests into the main branch. Reviewed code quality, tested locally, resolved conflicts, and updated the main branch. Ensured all changes adhere to project conventions and security requirements.
-- 2026-09-02: Merged PR #20 and PR #18 into the main branch. Reviewed and resolved conflicts, ensuring all changes adhere to project conventions and security requirements.
+- 2026-09-03: Implemented Order History feature and added passkey authentication integration.
 
 - 2026-08-26: Also lets add a policy page and faq pase Recent conversation with the customer (context for what the instruction refers to; the instruction  — AGENTS.md, apps/web/app/faq/page.tsx, apps/web/app/policy/page.tsx, apps/web/components/Header.tsx
 - 2026-08-30: Added a policy page and FAQ page to the web application. Updated the header to include links to these pages.

@@ -47,4 +47,6 @@ export const api = {
       headers: { 'Content-Type': 'application/json', 'x-cart-id': cartId },
       body: JSON.stringify(customer),
     }),
+  getOrders: (userId: string) =>
+    fetchApi<Order[]>(`/orders/history?userId=${encodeURIComponent(userId)}`),
 };

@@ -7,4 +7,4 @@ Next middleware-bypass CVE — don't rely on middleware alone for auth, enforce 
 ```bash
 npm install
 npm run dev   # http://localhost:3000
-```
+AUTH_PROVIDER_API_KEY=your_auth_provider_api_key

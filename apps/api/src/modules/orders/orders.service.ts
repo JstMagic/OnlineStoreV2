@@ -39,4 +39,7 @@ export class OrdersService {
     this.cartService.clearCart(cartId);
     return order;
   }
+  findOrdersByCustomer(customerId: string): Order[] {
+    return this.orders.filter(order => order.customer.email === customerId);
+  }
 }
