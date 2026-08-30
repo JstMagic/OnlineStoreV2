@@ -12,4 +12,4 @@ The web proxies `/api/*` to the API, so the browser stays same-origin.
 npm install
 npm run dev      # API on :8080, web on http://localhost:3000
 npm run verify   # type-checks both apps
-```
+AUTH_PROVIDER_API_KEY=your_auth_provider_api_key
