@@ -21,6 +21,7 @@ _None recorded yet._
 
 ## Project log
 
+- 2026-08-30: The deploy build for this app FAILED. Fix the code so it builds cleanly inside a container (no network and no running backend/database at bu — apps/web/app/order-history/page.tsx
 - 2026-08-30: Implement Order History Recent conversation with the customer (context for what the instruction refers to; the instruction itself is above): — apps/web/lib/api.ts, AGENTS.md, README.md, apps/api/src/modules/orders/dto/query-orders.dto.ts, apps/api/src/modules/orders/orders.controller.ts, apps/api/src/modules/orders/orders.service.ts, apps/web/README.md, apps/web/app/order-history/page.tsx
 - 2026-08-27: okay go ahead and merge them Recent conversation with the customer (context for what the instruction refers to; the instruction itself is ab — AGENTS.md
 - 2026-08-27: please merge them Recent conversation with the customer (context for what the instruction refers to; the instruction itself is above): User: — AGENTS.md
