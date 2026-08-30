@@ -19,6 +19,7 @@ COPY --from=build /app/apps/web/.next/standalone ./
 # API: production node_modules (overwrites standalone’s node_modules with the full monorepo set).
 COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/apps/web/.next/static ./apps/web/.next/static
+COPY --from=build /app/apps/web/.next/standalone/apps/web/server.js ./server.js
 COPY --from=build /app/apps/web/public ./apps/web/public
 COPY scripts/start.js ./scripts/start.js
 RUN mkdir -p apps/web/.next/cache && chown -R app:app apps/web/.next
