@@ -5,8 +5,12 @@ const EnvSchema = z.object({
   PORT: z.coerce.number().int().positive().default(8080),
   ALLOWED_ORIGINS: z.string().default('http://localhost:8080'),
   DATABASE_URL: z.string().optional().default('postgres://placeholder:5432/placeholder'),
-  PGSSLMODE: z.string().optional(),
-});
+  PGSSLMODE: z.enum(['disable', 'verify-full']).optional().default('verify-full'),
+  PGSSLROOTCERT: z.string().optional(),
+}).refine(
+  (env) => !(env.NODE_ENV === 'production' && env.PGSSLMODE === 'disable'),
+  { message: 'PGSSLMODE=disable is not allowed when NODE_ENV=production' },
+);
 export function validateEnv(config: Record<string, unknown>): z.infer<typeof EnvSchema> {
   const parsed = EnvSchema.safeParse(config);
   if (!parsed.success) {
