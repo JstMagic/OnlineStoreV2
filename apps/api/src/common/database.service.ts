@@ -1,15 +1,22 @@
 import { Injectable, OnModuleInit, OnModuleDestroy, Logger } from '@nestjs/common';
 import { Pool } from 'pg';
+import { buildDatabasePoolConfig } from './database-config';
 import { readdirSync, readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 
 @Injectable()
 export class DatabaseService implements OnModuleInit, OnModuleDestroy {
   private readonly log = new Logger('DatabaseService');
-  readonly pool = new Pool({
-    connectionString: process.env.DATABASE_URL,
-    ...(process.env.PGSSLMODE === 'no-verify' ? { ssl: { rejectUnauthorized: false } } : {}),
-  });
+  readonly pool = new Pool(
+    buildDatabasePoolConfig(process.env, (certificatePath) => {
+      try {
+        return readFileSync(certificatePath, 'utf8');
+      } catch (error) {
+        const detail = error instanceof Error ? error.message : String(error);
+        throw new Error(`Failed to read PGSSLROOTCERT certificate at ${certificatePath}: ${detail}`);
+      }
+    }),
+  );
   // Boot migration: create the demo table, then APPLY every sql/*.sql file in order (this is
   // how a new feature's schema + seed data actually gets created — drop a sql/NNN-name.sql and
   // it runs). Wrapped so a missing/unreachable database logs a warning instead of crashing the

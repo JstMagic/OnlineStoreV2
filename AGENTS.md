@@ -21,6 +21,7 @@ _None recorded yet._
 
 ## Project log
 
+- 2026-09-19: Please investigate and fix this GetFlowing Guard finding from revision 430ad2153312fdd3064c4c87fc47198c8f8147c1. Treat the finding as eviden — AGENTS.md, apps/api/.env.example, apps/api/src/common/database-config.test.ts, apps/api/src/common/database-config.ts, apps/api/src/common/database.service.ts, apps/api/src/config/env.validation.test.ts, apps/api/src/config/env.validation.ts, package-lock.json
 - 2026-08-30: The deploy build for this app FAILED. Fix the code so it builds cleanly inside a container (no network and no running backend/database at bu — apps/web/app/order-history/page.tsx
 - 2026-08-30: Implement Order History Recent conversation with the customer (context for what the instruction refers to; the instruction itself is above): — apps/web/lib/api.ts, AGENTS.md, README.md, apps/api/src/modules/orders/dto/query-orders.dto.ts, apps/api/src/modules/orders/orders.controller.ts, apps/api/src/modules/orders/orders.service.ts, apps/web/README.md, apps/web/app/order-history/page.tsx
 - 2026-08-27: okay go ahead and merge them Recent conversation with the customer (context for what the instruction refers to; the instruction itself is ab — AGENTS.md
@@ -51,3 +52,4 @@ _None recorded yet._
 - 2026-07-10: try to fix the deployment issue — apps/web/next.config.js
 - 2026-07-10: fix it — apps/api/src/app.module.ts, apps/api/src/modules/orders/dto/create-order.dto.ts, apps/web/components/CheckoutForm.tsx
 - 2026-07-07: Create a visually appealing online store using Next.js, NestJS, and Tailwind CSS. This should not be a full enterprise e-commerce platform,  — apps/api/src/interfaces/index.ts, apps/api/src/main.ts, apps/api/src/mock-data/categories.ts, apps/api/src/mock-data/products.ts, apps/api/src/modules/cart/cart.controller.ts, apps/api/src/modules/cart/cart.module.ts, apps/api/src/modules/cart/cart.service.ts, apps/api/src/modules/cart/dto/add-to-cart.dto.ts
+- 2026-06-22: Fixed GF-TLS-VERIFY by removing the Postgres no-verify TLS bypass. Postgres now defaults to verify-full, supports PGSSLROOTCERT, rejects insecure modes, and has regression tests.
