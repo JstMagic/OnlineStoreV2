@@ -41,3 +41,13 @@ export interface Order {
   total: number;
   createdAt: string;
 }
+
+export interface WishlistItem {
+  productId: number;
+  addedAt: string;
+}
+
+export interface Wishlist {
+  id: string;
+  items: WishlistItem[];
+}
