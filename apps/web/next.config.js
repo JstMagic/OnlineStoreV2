@@ -20,11 +20,6 @@ const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   output: 'standalone',
-  experimental: {
-    csp: {
-      nonce: 'x-nonce',
-    },
-  },
   // We lint via our own flat ESLint config (eslint.config.js) in the verify step; don't let
   // 'next build' run its own (eslintrc-based) lint, which would clash with the flat config.
   eslint: { ignoreDuringBuilds: true },

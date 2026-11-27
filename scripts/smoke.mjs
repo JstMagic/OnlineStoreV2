@@ -5,6 +5,7 @@ import { spawnSync } from 'node:child_process';
 import { mkdtempSync, readdirSync, readFileSync, existsSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
+import { randomInt } from 'node:crypto';
 
 const SQL_DIR = join(process.cwd(), "apps/api/sql");
 const sh = (cmd) => spawnSync('sh', ['-c', cmd], { encoding: 'utf8' });
@@ -19,7 +20,7 @@ const asRoot = typeof process.getuid === 'function' && process.getuid() === 0;
 const dataDir = mkdtempSync(join(tmpdir(), 'smoke-pg-'));
 if (asRoot) sh(`chown -R postgres ${dataDir}`);
 const pg_ = (cmd) => asRoot ? sh(`su postgres -s /bin/sh -c ${JSON.stringify(cmd)}`) : sh(cmd);
-const port = 5500 + Math.floor(Math.random() * 400);
+const port = randomInt(5500, 5900);
 let started = false;
 const cleanup = () => {
   if (started) pg_(`pg_ctl -D ${dataDir} stop -m immediate`);

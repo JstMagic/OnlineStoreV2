@@ -4,8 +4,9 @@ export function middleware(request: NextRequest) {
   // Generate a random nonce (crypto.randomUUID is available in the middleware runtime)
   const nonce = crypto.randomUUID().replace(/-/g, '');
 
-  // Pass the nonce to Next.js via a custom request header so the framework can apply it
-  // to its own inline scripts (used by the experimental.csp config below).
+  // Pass the nonce to Next.js via a custom request header. Next.js auto-detects a
+  // 'nonce-...' token in the CSP response header below and applies it to its own
+  // inline/async scripts, so no explicit next.config.js wiring is needed.
   request.headers.set('x-nonce', nonce);
 
   // Build the dynamic CSP keeping all other directives, only script-src changes.
