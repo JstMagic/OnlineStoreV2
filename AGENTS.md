@@ -1,8 +1,8 @@
 # OnlineStoreV2 — Agent Context
 
-This file is the project's working memory. The coding agent reads it BEFORE every change and
-appends to the log AFTER, so changes stay consistent as the project grows. Keep durable
-conventions and decisions here.
+This file is the project's working memory. The coding agent reads it before every change, and
+the platform adds a line to the log after each one, so changes stay consistent as the project
+grows. Keep durable conventions and decisions here.
 
 ## Stack
 
@@ -10,7 +10,7 @@ conventions and decisions here.
 
 ## Conventions
 
-- `npm run verify` (install + type-check + lint) must pass before a change is done.
+- `npm run verify` must pass before a change is done.
 - TypeScript is strict and `any` is banned — use precise types, or `unknown` + narrowing.
 - Extend the existing module/page structure; keep the security baseline (validation, headers, etc.).
 - Build features end-to-end and wire them so they actually run (migrations applied, frontend↔API connected).
@@ -21,6 +21,7 @@ _None recorded yet._
 
 ## Project log
 
+- 2026-11-27: Fix 7 Guard findings: Dockerfile, apps/web/app/api/[...path]/build-upstream-url.test.ts, apps/web/app/api/[...path]/build-upstream-url.ts, apps/web/app/api/[...path]/route.ts, apps/web/package.json, package-lock.json, package.json
 - 2026-09-19: Please investigate and fix this GetFlowing Guard finding from revision 430ad2153312fdd3064c4c87fc47198c8f8147c1. Treat the finding as eviden — AGENTS.md, apps/api/.env.example, apps/api/src/common/database-config.test.ts, apps/api/src/common/database-config.ts, apps/api/src/common/database.service.ts, apps/api/src/config/env.validation.test.ts, apps/api/src/config/env.validation.ts, package-lock.json
 - 2026-08-30: The deploy build for this app FAILED. Fix the code so it builds cleanly inside a container (no network and no running backend/database at bu — apps/web/app/order-history/page.tsx
 - 2026-08-30: Implement Order History Recent conversation with the customer (context for what the instruction refers to; the instruction itself is above): — apps/web/lib/api.ts, AGENTS.md, README.md, apps/api/src/modules/orders/dto/query-orders.dto.ts, apps/api/src/modules/orders/orders.controller.ts, apps/api/src/modules/orders/orders.service.ts, apps/web/README.md, apps/web/app/order-history/page.tsx
