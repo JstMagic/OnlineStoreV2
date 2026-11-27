@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { buildUpstreamUrl } from './build-upstream-url';
 
 export const runtime = 'nodejs';
 
@@ -10,9 +11,12 @@ async function proxy(
   req: NextRequest,
   { params }: { params: { path: string[] } },
 ): Promise<NextResponse> {
-  const base = getApiBase().replace(/\/+$/, '');
-  const target = new URL(params.path.join('/'), `${base}/`);
-  target.search = req.nextUrl.search;
+  let target: URL;
+  try {
+    target = buildUpstreamUrl(getApiBase(), params.path, req.nextUrl.search);
+  } catch {
+    return NextResponse.json({ error: 'invalid_upstream_target' }, { status: 400 });
+  }
 
   const headers = new Headers(req.headers);
   // These are hop-by-hop headers and must not be forwarded.
