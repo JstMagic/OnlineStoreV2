@@ -12,6 +12,20 @@ async function proxy(
 ): Promise<NextResponse> {
   const base = getApiBase().replace(/\/+$/, '');
   const target = new URL(params.path.join('/'), `${base}/`);
+  
+  // Validate target URL to prevent SSRF attacks
+  if (!/^https?:/.test(target.protocol)) {
+    return NextResponse.json({ error: 'invalid_scheme' }, { status: 400 });
+  }
+  
+  const targetHostname = target.hostname;
+  if (!targetHostname || 
+      /^(localhost|127\.|::1|0\.)/.test(targetHostname) ||
+      /^(192\.168\.|10\.|172\.1[6-9]\.|172\.2[0-9]\.|172\.3[01]\.)/.test(targetHostname) ||
+      targetHostname === '169.254.169.254') {
+    return NextResponse.json({ error: 'forbidden_host' }, { status: 403 });
+  }
+  
   target.search = req.nextUrl.search;
 
   const headers = new Headers(req.headers);

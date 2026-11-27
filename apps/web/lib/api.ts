@@ -6,8 +6,11 @@ const BASE = isServer
   : (process.env.NEXT_PUBLIC_API_URL || '/api');
 
 async function fetchApi<T>(endpoint: string, init?: RequestInit): Promise<T> {
+  if (!endpoint.startsWith('/') || endpoint.includes('//') || endpoint.includes('..')) {
+    throw new Error('Invalid endpoint');
+  }
   const url = `${BASE}${endpoint}`;
-  const res = await fetch(url, init);
+  const res = await fetch(url, { ...init, redirect: 'manual' });
   if (!res.ok) {
     const text = await res.text();
     throw new Error(text || res.statusText);
