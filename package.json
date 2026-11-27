@@ -15,5 +15,11 @@
   },
   "devDependencies": {
     "concurrently": "^9.0.1"
+  },
+  "overrides": {
+    "multer": "2.4.0",
+    "lodash": "4.17.23",
+    "source-map-js": "1.2.2",
+    "postcss": "8.5.18"
   }
 }

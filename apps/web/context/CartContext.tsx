@@ -3,34 +3,26 @@ import React, { createContext, useContext, useEffect, useState, useCallback, Rea
 import { api } from '@/lib/api';
 import type { Cart } from '@/lib/types';
 
-/* ---------------- safe uuid ---------------- */
-function generateUUID(): string {
-  try {
-    if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
-      return crypto.randomUUID();
-    }
-  } catch { /* ignore */ }
-  // Fallback 1: crypto.getRandomValues
-  try {
-    const getRandomValues =
-      typeof crypto !== 'undefined' && typeof crypto.getRandomValues === 'function'
-        ? (arr: Uint8Array) => crypto.getRandomValues(arr)
-        : (arr: Uint8Array) => {
-            for (let i = 0; i < arr.length; i++) arr[i] = Math.floor(Math.random() * 256);
-          };
+/* ---------------- safe uuid ----------------
+ * The cart id doubles as a bearer token: anyone who knows it can read/mutate that cart
+ * (see CartController, which trusts the `x-cart-id` header with no further auth). It must
+ * therefore come from a CSPRNG only; Math.random() is predictable (CWE-338) and would let an
+ * attacker guess another shopper's cart id. We rely on the Web Crypto API, which every
+ * supported browser provides; if it is ever missing we fail fast instead of minting a
+ * guessable id. */
+export function generateUUID(): string {
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+    return crypto.randomUUID();
+  }
+  if (typeof crypto !== 'undefined' && typeof crypto.getRandomValues === 'function') {
     const buf = new Uint8Array(16);
-    getRandomValues(buf);
+    crypto.getRandomValues(buf);
     buf[6] = (buf[6] & 0x0f) | 0x40;
     buf[8] = (buf[8] & 0x3f) | 0x80;
     const hex = Array.from(buf, (b) => b.toString(16).padStart(2, '0')).join('');
     return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-${hex.slice(12, 16)}-${hex.slice(16, 20)}-${hex.slice(20)}`;
-  } catch {
-    // Fallback 2: deterministic from Math.random (last resort)
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-      const r = (Math.random() * 16) | 0;
-      return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
-    });
   }
+  throw new Error('No cryptographically secure random source available to generate a cart id');
 }
 
 interface CartContextType {

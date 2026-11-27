@@ -8,10 +8,11 @@ function getApiBase(): string {
 
 async function proxy(
   req: NextRequest,
-  { params }: { params: { path: string[] } },
+  { params }: { params: Promise<{ path: string[] }> },
 ): Promise<NextResponse> {
+  const { path } = await params;
   const base = getApiBase().replace(/\/+$/, '');
-  const target = new URL(params.path.join('/'), `${base}/`);
+  const target = new URL(path.join('/'), `${base}/`);
   target.search = req.nextUrl.search;
 
   const headers = new Headers(req.headers);
